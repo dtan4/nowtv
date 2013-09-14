@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'json'
 require 'open-uri'
+require 'time'
 
 module Nowtv
   class Client
@@ -27,7 +28,9 @@ module Nowtv
       programs.map do |program|
         {
           station: program["station_name"],
-          title: program["title"].gsub('　', ' ') # remove full-width space
+          title: program["title"].gsub('　', ' '), # remove full-width space
+          start: Time.parse(program["start"]).strftime("%H:%M"),
+          end: Time.parse(program["end"]).strftime("%H:%M")
         }
       end
     end
