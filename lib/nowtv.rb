@@ -1,5 +1,6 @@
 require "nowtv/version"
+require "nowtv/client"
 
 module Nowtv
-  # Your code goes here...
+  # something
 end

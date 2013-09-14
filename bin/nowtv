@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+
+require 'nowtv'
+require 'optparse'
+
+region_code = 'tokyo'
+
+if ARGV.length > 1
+  $stderr.puts 'Too many arguments.'
+elsif ARGV.length == 1
+  region_code = ARGV[0]
+end
+
+client = Nowtv::Client.new
+programs = client.get_program_list(region_code)
+
+programs.each do |program|
+  puts "#{program[:station]} = #{program[:title]}"
+end
