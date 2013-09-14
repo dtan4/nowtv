@@ -10,7 +10,7 @@ module Nowtv
     def get_program_list(region_code)
       programs = get_programs(region_code)
 
-      unless programs
+      unless programs.length > 1
         $stderr.puts 'Failed to get programs!'
       end
 
@@ -21,7 +21,7 @@ module Nowtv
       url = API_URL + region_code
       JSON.parse(open(url).read.sub(/^\(/, '').sub(/\)$/, ''))['programs']
     rescue ParseError
-      nil
+      []
     end
 
     def restruct_program_list(programs)
