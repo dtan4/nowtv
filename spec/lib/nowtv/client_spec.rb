@@ -15,7 +15,7 @@ module Nowtv
     end
 
     describe '#get_programs' do
-      context 'when valid region code is given' do
+      context 'with valid region code' do
         before(:all) do
           @programs = @client.get_programs(@valid_region_code)
         end
@@ -29,7 +29,7 @@ module Nowtv
         end
       end
 
-      context 'when invalid region code is given' do
+      context 'with invalid region' do
         before(:all) do
           @programs = @client.get_programs(@invalid_region_code)
         end
@@ -45,7 +45,7 @@ module Nowtv
     end
 
     describe '#get_program_list' do
-      context 'when valid region code is given' do
+      context 'with valid region code' do
         before do
           stub_request(:get, API_URL + @valid_region_code)
             .to_return(body: VALID_BODY, status: 200)
