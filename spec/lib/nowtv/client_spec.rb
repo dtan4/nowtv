@@ -41,7 +41,9 @@ module Nowtv
       context 'with valid region code' do
         subject { @client.get_program_list(@valid_region_code) }
         it { should be_instance_of Array }
-        it { should eql EXAMPLE_RESTRUCTED_PROGRAMS }
+        it 'should be equal to example data' do
+          should eql EXAMPLE_RESTRUCTED_PROGRAMS
+        end
       end
 
       context 'with invalid region code' do
@@ -55,13 +57,17 @@ module Nowtv
     describe '#restrct_program_list' do
       subject { @client.restruct_program_list(EXAMPLE_PROGRAMS) }
       it { should be_instance_of Array }
-      it { should eql EXAMPLE_RESTRUCTED_PROGRAMS }
+      it 'should be equal to example data' do
+        should eql EXAMPLE_RESTRUCTED_PROGRAMS
+      end
     end
 
     describe '#get_region_list' do
       subject { @client.get_region_list }
       it { should be_instance_of Array }
-      it { should eql EXAMPLE_REGION_LIST }
+      it 'should be equal to example data' do
+        should eql EXAMPLE_REGION_LIST
+      end
     end
   end
 end
