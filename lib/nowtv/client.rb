@@ -6,6 +6,7 @@ require 'time'
 module Nowtv
   class Client
     API_URL = 'http://asp.tvguide.or.jp/api/broadcasting?ccode=goo&region_code='
+    REGION_URL = 'http://asp.tvguide.or.jp/api/regions?ccode=goo'
 
     def get_program_list(region_code)
       programs = get_programs(region_code)
@@ -33,6 +34,18 @@ module Nowtv
           end: Time.parse(program["end"]).strftime("%H:%M")
         }
       end
+    end
+
+    def get_region_list
+      regions = JSON.parse(open(REGION_URL).read.sub(/^\(/, '').sub(/\)$/, ''))['regions']
+      regions.map do |region|
+        {
+          name: region['name'],
+          code: region['code']
+        }
+      end
+    rescue ParseError
+      []
     end
   end
 end

@@ -5,6 +5,7 @@ require 'webmock/rspec'
 WebMock.allow_net_connect!
 
 API_URL = 'http://asp.tvguide.or.jp/api/broadcasting?ccode=goo&region_code='
+REGION_URL = 'http://asp.tvguide.or.jp/api/regions?ccode=goo'
 
 module Nowtv
   describe Client do
@@ -84,6 +85,21 @@ module Nowtv
         @restructed.should eql EXAMPLE_RESTRUCTED_PROGRAMS
       end
     end
+
+    describe '#get_region_list' do
+      before do
+        stub_request(:get, REGION_URL).to_return(body: EXAMPLE_REGION_BODY, status: 200)
+        @region_list = @client.get_region_list
+      end
+
+      it 'should return Array' do
+        @region_list.should be_instance_of Array
+      end
+
+      it 'should be equal to example data' do
+        @region_list.should eql EXAMPLE_REGION_LIST
+      end
+    end
   end
 end
 
@@ -121,4 +137,59 @@ EXAMPLE_RESTRUCTED_PROGRAMS =
    {station: "フジテレビ", title: "ペケポン", start: "19:00", end: "19:57"},
    {station: "TOKYO MX", title: "めぞん一刻", start: "19:30", end: "20:00"},
    {station: "放送大学テレビ", title: "文化人類学第１１回", start: "19:00", end: "19:45"}
+  ]
+
+EXAMPLE_REGION_BODY = <<-EOS
+({"error":0,"ccode":"goo","media_code":null,"regions":[{"code":"hokk","name":"\u5317\u6d77\u9053","pack_code":null},{"code":"aomori","name":"\u9752\u68ee","pack_code":null},{"code":"iwate","name":"\u5ca9\u624b","pack_code":null},{"code":"miya","name":"\u5bae\u57ce","pack_code":null},{"code":"akita","name":"\u79cb\u7530","pack_code":null},{"code":"yamagata","name":"\u5c71\u5f62","pack_code":null},{"code":"fuku","name":"\u798f\u5cf6","pack_code":null},{"code":"ibaraki","name":"\u8328\u57ce","pack_code":null},{"code":"tochigi","name":"\u6803\u6728","pack_code":null},{"code":"gunma","name":"\u7fa4\u99ac","pack_code":null},{"code":"saitama","name":"\u57fc\u7389","pack_code":null},{"code":"chiba","name":"\u5343\u8449","pack_code":null},{"code":"tokyo","name":"\u6771\u4eac","pack_code":null},{"code":"kanagawa","name":"\u795e\u5948\u5ddd","pack_code":null},{"code":"niigata","name":"\u65b0\u6f5f","pack_code":null},{"code":"toyama","name":"\u5bcc\u5c71","pack_code":null},{"code":"ishikawa","name":"\u77f3\u5ddd","pack_code":null},{"code":"fukui","name":"\u798f\u4e95","pack_code":null},{"code":"yamanasi","name":"\u5c71\u68a8","pack_code":null},{"code":"nagano","name":"\u9577\u91ce","pack_code":null},{"code":"gifu","name":"\u5c90\u961c","pack_code":null},{"code":"sizu","name":"\u9759\u5ca1","pack_code":null},{"code":"aichi","name":"\u611b\u77e5","pack_code":null},{"code":"mie","name":"\u4e09\u91cd","pack_code":null},{"code":"siga","name":"\u6ecb\u8cc0","pack_code":null},{"code":"kyoto","name":"\u4eac\u90fd","pack_code":null},{"code":"osaka","name":"\u5927\u962a","pack_code":null},{"code":"hyougo","name":"\u5175\u5eab","pack_code":null},{"code":"nara","name":"\u5948\u826f","pack_code":null},{"code":"wakayama","name":"\u548c\u6b4c\u5c71","pack_code":null},{"code":"tottori","name":"\u9ce5\u53d6","pack_code":null},{"code":"shimane","name":"\u5cf6\u6839","pack_code":null},{"code":"okayama","name":"\u5ca1\u5c71","pack_code":null},{"code":"hirosima","name":"\u5e83\u5cf6","pack_code":null},{"code":"yamagchi","name":"\u5c71\u53e3","pack_code":null},{"code":"tokusima","name":"\u5fb3\u5cf6","pack_code":null},{"code":"kagawa","name":"\u9999\u5ddd","pack_code":null},{"code":"ehime","name":"\u611b\u5a9b","pack_code":null},{"code":"kouchi","name":"\u9ad8\u77e5","pack_code":null},{"code":"fukuoka","name":"\u798f\u5ca1","pack_code":null},{"code":"saga","name":"\u4f50\u8cc0","pack_code":null},{"code":"nagasaki","name":"\u9577\u5d0e","pack_code":null},{"code":"kumamoto","name":"\u718a\u672c","pack_code":null},{"code":"oita","name":"\u5927\u5206","pack_code":null},{"code":"miyazaki","name":"\u5bae\u5d0e","pack_code":null},{"code":"kagosima","name":"\u9e7f\u5150\u5cf6","pack_code":null},{"code":"nawa","name":"\u6c96\u7e04","pack_code":null}]})
+EOS
+
+EXAMPLE_REGION_LIST =
+  [
+   {:name=>"北海道", :code=>"hokk"},
+   {:name=>"青森", :code=>"aomori"},
+   {:name=>"岩手", :code=>"iwate"},
+   {:name=>"宮城", :code=>"miya"},
+   {:name=>"秋田", :code=>"akita"},
+   {:name=>"山形", :code=>"yamagata"},
+   {:name=>"福島", :code=>"fuku"},
+   {:name=>"茨城", :code=>"ibaraki"},
+   {:name=>"栃木", :code=>"tochigi"},
+   {:name=>"群馬", :code=>"gunma"},
+   {:name=>"埼玉", :code=>"saitama"},
+   {:name=>"千葉", :code=>"chiba"},
+   {:name=>"東京", :code=>"tokyo"},
+   {:name=>"神奈川", :code=>"kanagawa"},
+   {:name=>"新潟", :code=>"niigata"},
+   {:name=>"富山", :code=>"toyama"},
+   {:name=>"石川", :code=>"ishikawa"},
+   {:name=>"福井", :code=>"fukui"},
+   {:name=>"山梨", :code=>"yamanasi"},
+   {:name=>"長野", :code=>"nagano"},
+   {:name=>"岐阜", :code=>"gifu"},
+   {:name=>"静岡", :code=>"sizu"},
+   {:name=>"愛知", :code=>"aichi"},
+   {:name=>"三重", :code=>"mie"},
+   {:name=>"滋賀", :code=>"siga"},
+   {:name=>"京都", :code=>"kyoto"},
+   {:name=>"大阪", :code=>"osaka"},
+   {:name=>"兵庫", :code=>"hyougo"},
+   {:name=>"奈良", :code=>"nara"},
+   {:name=>"和歌山", :code=>"wakayama"},
+   {:name=>"鳥取", :code=>"tottori"},
+   {:name=>"島根", :code=>"shimane"},
+   {:name=>"岡山", :code=>"okayama"},
+   {:name=>"広島", :code=>"hirosima"},
+   {:name=>"山口", :code=>"yamagchi"},
+   {:name=>"徳島", :code=>"tokusima"},
+   {:name=>"香川", :code=>"kagawa"},
+   {:name=>"愛媛", :code=>"ehime"},
+   {:name=>"高知", :code=>"kouchi"},
+   {:name=>"福岡", :code=>"fukuoka"},
+   {:name=>"佐賀", :code=>"saga"},
+   {:name=>"長崎", :code=>"nagasaki"},
+   {:name=>"熊本", :code=>"kumamoto"},
+   {:name=>"大分", :code=>"oita"},
+   {:name=>"宮崎", :code=>"miyazaki"},
+   {:name=>"鹿児島", :code=>"kagosima"},
+   {:name=>"沖縄", :code=>"nawa"}
   ]
