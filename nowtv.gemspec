@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "nowtv"
   spec.version       = Nowtv::VERSION
   spec.authors       = ["dtan4"]
-  spec.email         = ["dtan4@mac"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.email         = ["dtanshi45@gmail.com"]
+  spec.description   = %q{Show current TV programs}
+  spec.summary       = %q{Show current TV programs}
+  spec.homepage      = "https://github.com/dtan4/nowtv"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

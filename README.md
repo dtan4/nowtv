@@ -1,6 +1,6 @@
 # Nowtv
 
-TODO: Write a gem description
+Show current TV programs
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ nowtv
 
 ## Contributing
 
