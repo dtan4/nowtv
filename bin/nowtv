@@ -4,7 +4,10 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
 require 'nowtv'
 
-region_code = 'tokyo'
+CONFIGURE_PATH = ENV["HOME"] + '/.nowtv'
+
+region_code =
+  File.exists?(CONFIGURE_PATH) ? open(CONFIGURE_PATH).read.lines[0].strip : 'tokyo'
 
 if ARGV.length > 1
   $stderr.puts 'Too many arguments.'
