@@ -19,5 +19,5 @@ client = Nowtv::Client.new
 programs = client.get_program_list(region_code)
 
 programs.each do |program|
-  puts "#{program[:station]} = #{program[:title]} [#{program[:start]} -> #{program[:end]}]"
+  puts "#{program[:station]} = #{program[:title]} [#{program[:start_time]} -> #{program[:end_time]}]"
 end
