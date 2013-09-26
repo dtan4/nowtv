@@ -30,8 +30,8 @@ module Nowtv
         {
           station: program["station_name"],
           title: program["title"].gsub('　', ' '), # replace full-width space to half-width space
-          start: Time.parse(program["start"]).strftime("%H:%M"),
-          end: Time.parse(program["end"]).strftime("%H:%M")
+          start_time: Time.parse(program["start"]).strftime("%H:%M"),
+          end_time: Time.parse(program["end"]).strftime("%H:%M")
         }
       end
     end
