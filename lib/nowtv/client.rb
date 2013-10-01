@@ -9,18 +9,17 @@ module Nowtv
     API_URL = 'http://asp.tvguide.or.jp/api/broadcasting?ccode=goo&region_code='
     REGION_URL = 'http://asp.tvguide.or.jp/api/regions?ccode=goo'
 
-    def get_program_list(region_code)
-      programs = get_programs(region_code)
+    def get_program_list(region)
+      programs = get_programs(region)
 
       unless programs.length > 1
-        region_code_by_name = get_region_list[:"#{region_code}"]
+        region_code_by_name = get_region_code(region)
 
         unless region_code_by_name
           $stderr.puts 'Failed to get programs!'
           return nil
         end
 
-        puts region_code_by_name
         programs = get_programs(region_code_by_name)
       end
 
@@ -48,10 +47,15 @@ module Nowtv
     def get_region_list
       regions = JSON.parse(open(REGION_URL).read.sub(/^\(/, '').sub(/\)$/, ''))['regions']
       result = {}
-      regions.each { |region| result[:"#{region["name"]}"] = region["code"] }
+      regions.each { |region| result[region["name"].to_sym] = region["code"] }
       result
     rescue
-      []
+      {}
+    end
+
+    def get_region_code(region_name)
+      region_list = get_region_list
+      region_list[region_name.to_sym]
     end
   end
 end

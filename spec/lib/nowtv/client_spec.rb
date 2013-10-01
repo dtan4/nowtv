@@ -15,6 +15,7 @@ module Nowtv
       @valid_region_code = 'tokyo'
       @valid_region_name = '東京'
       @invalid_region_code = 'nihon'
+      @invalid_region_name = '日本'
     end
 
     before do
@@ -78,6 +79,18 @@ module Nowtv
       it { should have(47).items }
       it 'should be equal to example data' do
         should eq EXAMPLE_REGION_LIST
+      end
+    end
+
+    describe '#get_region_code' do
+      context 'with valid name' do
+        subject { @client.get_region_code(@valid_region_name) }
+        it { should == @valid_region_code }
+      end
+
+      context 'with invalid name' do
+        subject { @client.get_region_code(@invalid_region_name) }
+        it { should be_nil }
       end
     end
   end
