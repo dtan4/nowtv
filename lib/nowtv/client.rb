@@ -13,7 +13,15 @@ module Nowtv
       programs = get_programs(region_code)
 
       unless programs.length > 1
-        $stderr.puts 'Failed to get programs!'
+        region_code_by_name = get_region_list[:"#{region_code}"]
+
+        unless region_code_by_name
+          $stderr.puts 'Failed to get programs!'
+          return nil
+        end
+
+        puts region_code_by_name
+        programs = get_programs(region_code_by_name)
       end
 
       restruct_program_list(programs)
@@ -22,7 +30,7 @@ module Nowtv
     def get_programs(region_code)
       url = API_URL + region_code
       JSON.parse(open(url).read.sub(/^\(/, '').sub(/\)$/, ''))['programs']
-    rescue ParseError
+    rescue
       []
     end
 
@@ -39,13 +47,10 @@ module Nowtv
 
     def get_region_list
       regions = JSON.parse(open(REGION_URL).read.sub(/^\(/, '').sub(/\)$/, ''))['regions']
-      regions.map do |region|
-        {
-          name: region['name'],
-          code: region['code']
-        }
-      end
-    rescue ParseError
+      result = {}
+      regions.each { |region| result[:"#{region["name"]}"] = region["code"] }
+      result
+    rescue
       []
     end
   end
