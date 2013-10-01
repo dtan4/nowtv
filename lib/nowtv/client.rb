@@ -2,6 +2,7 @@
 require 'json'
 require 'open-uri'
 require 'time'
+require 'nkf'
 
 module Nowtv
   class Client
@@ -28,10 +29,10 @@ module Nowtv
     def restruct_program_list(programs)
       programs.map do |program|
         {
-          station: program["station_name"],
-          title: program["title"].gsub('　', ' '), # replace full-width space to half-width space
-          start_time: Time.parse(program["start"]).strftime("%H:%M"),
-          end_time: Time.parse(program["end"]).strftime("%H:%M")
+          station: NKF.nkf("-wZ0", program["station_name"]),
+          title: NKF.nkf("-wZ0", program["title"]).gsub("　", " "),
+          start: Time.parse(program["start"]).strftime("%H:%M"),
+          end: Time.parse(program["end"]).strftime("%H:%M")
         }
       end
     end

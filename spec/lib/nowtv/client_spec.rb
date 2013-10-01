@@ -97,15 +97,15 @@ EXAMPLE_PROGRAMS =
 
 EXAMPLE_RESTRUCTED_PROGRAMS =
   [
-   {station: "NHK総合", title: "特報首都圏", start_time: "19:30", end_time: "19:55"},
-   {station: "NHK Eテレ", title: "課外授業 ようこそ先輩・選", start_time: "19:25", end_time: "19:48"},
-   {station: "日本テレビ", title: "緊急出動！逃走車を追え！交通警察 真夏の大捜査線", start_time: "19:00", end_time: "20:54"},
-   {station: "テレビ朝日", title: "ドラえもん誕生日１時間スペシャル", start_time: "19:00", end_time: "19:54"},
-   {station: "TBSテレビ", title: "爆報！ＴＨＥ フライデー", start_time: "19:00", end_time: "19:56"},
-   {station: "テレビ東京", title: "お金がなくても幸せライフ がんばれプアーズ！", start_time: "18:30", end_time: "19:50"},
-   {station: "フジテレビ", title: "ペケポン", start_time: "19:00", end_time: "19:57"},
-   {station: "TOKYO MX", title: "めぞん一刻", start_time: "19:30", end_time: "20:00"},
-   {station: "放送大学テレビ", title: "文化人類学第１１回", start_time: "19:00", end_time: "19:45"}
+   {station: "NHK総合", title: "特報首都圏", start: "19:30", end: "19:55"},
+   {station: "NHK Eテレ", title: "課外授業 ようこそ先輩・選", start: "19:25", end: "19:48"},
+   {station: "日本テレビ", title: "緊急出動!逃走車を追え!交通警察 真夏の大捜査線", start: "19:00", end: "20:54"},
+   {station: "テレビ朝日", title: "ドラえもん誕生日1時間スペシャル", start: "19:00", end: "19:54"},
+   {station: "TBSテレビ", title: "爆報!THE フライデー", start: "19:00", end: "19:56"},
+   {station: "テレビ東京", title: "お金がなくても幸せライフ がんばれプアーズ!", start: "18:30", end: "19:50"},
+   {station: "フジテレビ", title: "ペケポン", start: "19:00", end: "19:57"},
+   {station: "TOKYO MX", title: "めぞん一刻", start: "19:30", end: "20:00"},
+   {station: "放送大学テレビ", title: "文化人類学第11回", start: "19:00", end: "19:45"}
   ]
 
 EXAMPLE_REGION_BODY = <<-EOS
