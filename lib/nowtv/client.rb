@@ -38,8 +38,8 @@ module Nowtv
         {
           station: NKF.nkf("-wZ0", program["station_name"]),
           title: NKF.nkf("-wZ0", program["title"]).gsub("　", " "),
-          start: Time.parse(program["start"]).strftime("%H:%M"),
-          end: Time.parse(program["end"]).strftime("%H:%M")
+          start_time: Time.parse(program["start"]).strftime("%H:%M"),
+          end_time: Time.parse(program["end"]).strftime("%H:%M")
         }
       end
     end
