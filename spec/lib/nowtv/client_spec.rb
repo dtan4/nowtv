@@ -4,8 +4,8 @@ require 'webmock/rspec'
 
 WebMock.allow_net_connect!
 
-API_URL = 'http://asp.tvguide.or.jp/api/broadcasting?ccode=goo&region_code='
-REGION_URL = 'http://asp.tvguide.or.jp/api/regions?ccode=goo'
+API_URL = 'http://asp.tvguide.or.jp/api/broadcasting?region_code='
+REGION_URL = 'http://asp.tvguide.or.jp/api/regions'
 
 module Nowtv
   describe Client do
