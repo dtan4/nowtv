@@ -1,5 +1,7 @@
 # Nowtv
 
+[![Build Status](https://travis-ci.org/dtan4/nowtv.png?branch=master)](https://travis-ci.org/dtan4/nowtv)
+
 Show current TV programs
 
 ## Installation
