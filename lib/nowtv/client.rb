@@ -7,7 +7,6 @@ require 'nkf'
 module Nowtv
   class Client
     API_URL = 'http://www.tvguide.or.jp/TXML301PG.php?type=TVG&regionId='
-    REGION_URL = 'http://asp.tvguide.or.jp/api/regions'
 
     def get_program_list(region_id)
       programs = get_programs(region_id)
