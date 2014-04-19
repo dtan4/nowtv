@@ -1,20 +1,21 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-
 require 'nowtv'
 
 CONFIGURE_PATH = ENV["HOME"] + '/.nowtv'
+USAGE = "USAGE: nowtv [prefecture]"
 
-region_code =
+prefecture =
   File.exists?(CONFIGURE_PATH) ? open(CONFIGURE_PATH).read.lines[0].strip : 'tokyo'
 
 if ARGV.length > 1
-  $stderr.puts 'Too many arguments.'
+  $stderr.puts USAGE
+  exit 1
 elsif ARGV.length == 1
-  region_code = ARGV[0]
+  prefecture = ARGV[0]
 end
 
+region_code = Nowtv::Region.get_region_id(prefecture)
 client = Nowtv::Client.new
 programs = client.get_program_list(region_code)
 
