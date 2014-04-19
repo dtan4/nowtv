@@ -26,6 +26,8 @@ module Nowtv
       restruct_program_list(programs)
     end
 
+    private
+
     def get_programs(region_code)
       url = API_URL + region_code
       JSON.parse(open(url).read.sub(/^\(/, '').sub(/\)$/, ''))['programs']
@@ -44,18 +46,20 @@ module Nowtv
       end
     end
 
-    def get_region_list
-      regions = JSON.parse(open(REGION_URL).read.sub(/^\(/, '').sub(/\)$/, ''))['regions']
-      result = {}
-      regions.each { |region| result[region["name"].to_sym] = region["code"] }
-      result
-    rescue
-      {}
-    end
-
     def get_region_code(region_name)
       region_list = get_region_list
       region_list[region_name.to_sym]
+    end
+
+    def get_region_list
+      regions = JSON.parse(open(REGION_URL).read.sub(/^\(/, '').sub(/\)$/, ''))['regions']
+
+      regions.inject({}) do |result, region|
+        result[region["name"].to_sym] = region["code"]
+        result
+      end
+    rescue
+      {}
     end
   end
 end

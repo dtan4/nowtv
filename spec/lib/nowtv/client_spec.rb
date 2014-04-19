@@ -26,20 +26,6 @@ module Nowtv
       stub_request(:get, REGION_URL).to_return(body: EXAMPLE_REGION_BODY, status: 200)
     end
 
-    describe '#get_programs' do
-      context 'with valid region code' do
-        subject { @client.get_programs(@valid_region_code) }
-        it { should be_instance_of Array }
-        it { should have_at_least(1).items }
-      end
-
-      context 'with invalid region' do
-        subject { @client.get_programs(@invalid_region_code) }
-        it { should be_instance_of Array }
-        it { should have(0).items }
-      end
-    end
-
     describe '#get_program_list' do
       context 'with valid region code' do
         subject { @client.get_program_list(@valid_region_code) }
@@ -62,35 +48,6 @@ module Nowtv
           $stderr.should_receive(:puts).with('Failed to get programs!')
           @program_list = @client.get_program_list(@invalid_region_code)
         end
-      end
-    end
-
-    describe '#restrct_program_list' do
-      subject { @client.restruct_program_list(EXAMPLE_PROGRAMS) }
-      it { should be_instance_of Array }
-      it 'should be equal to example data' do
-        should eql EXAMPLE_RESTRUCTED_PROGRAMS
-      end
-    end
-
-    describe '#get_region_list' do
-      subject { @client.get_region_list }
-      it { should be_instance_of Hash }
-      it { should have(47).items }
-      it 'should be equal to example data' do
-        should eq EXAMPLE_REGION_LIST
-      end
-    end
-
-    describe '#get_region_code' do
-      context 'with valid name' do
-        subject { @client.get_region_code(@valid_region_name) }
-        it { should == @valid_region_code }
-      end
-
-      context 'with invalid name' do
-        subject { @client.get_region_code(@invalid_region_name) }
-        it { should be_nil }
       end
     end
   end
