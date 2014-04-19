@@ -8,7 +8,7 @@ API_URL = 'http://www.tvguide.or.jp/TXML301PG.php?type=TVG&regionId='
 
 module Nowtv
   describe Client do
-    load File.expand_path("../../fixtures/fixtures.rb", __dir__)
+    load File.expand_path("../../fixtures/fixtures.rb", File.dirname(__FILE__))
 
     let(:client) { Nowtv::Client.new }
     let(:valid_region_code) { 13 }
