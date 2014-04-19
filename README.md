@@ -1,6 +1,7 @@
 # Nowtv
 
 [![Build Status](https://travis-ci.org/dtan4/nowtv.png?branch=master)](https://travis-ci.org/dtan4/nowtv)
+[![Coverage Status](https://coveralls.io/repos/dtan4/nowtv/badge.png?branch=master)](https://coveralls.io/r/dtan4/nowtv?branch=master)
 
 Show current TV programs
 
