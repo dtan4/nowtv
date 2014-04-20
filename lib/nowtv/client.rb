@@ -29,14 +29,33 @@ module Nowtv
         {
           station: half_width(program["stationDispName"]),
           title: half_width(info["programTitle"]),
-          start_time: Time.parse(info["startDateTime"]),
-          end_time: Time.parse(info["endDateTime"])
+          start_time: parse_datetime(info["startDateTime"]),
+          end_time: parse_datetime(info["endDateTime"])
         }
       end
     end
 
     def half_width(str)
       NKF.nkf("-wZ0", str).gsub("　", " ")
+    end
+
+    def parse_datetime(datetime)
+      date, time = datetime.split(" ")
+      hour, minute = time.split(":").map(&:to_i)
+
+      hour >= 24 ? parse_midnight_time(date, hour, minute) : Time.parse(datetime)
+    end
+
+    def parse_midnight_time(date_str, hour, minute)
+      day_add = hour / 24
+      hour %= 24
+
+      datetime = Time.parse(date_str)
+      datetime += day_add * 60 * 60 * 24
+      datetime += hour * 60 * 60
+      datetime += minute * 60
+
+      datetime
     end
   end
 
