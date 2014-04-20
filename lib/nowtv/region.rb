@@ -51,7 +51,7 @@ module Nowtv
     }
 
     def self.get_region_id(prefecture)
-      prefecture.downcase!
+      prefecture = prefecture.downcase
       @prefectures.include?(prefecture) ? @prefectures.index(prefecture) + 1 : 0
     end
   end
