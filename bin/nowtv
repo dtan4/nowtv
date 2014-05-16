@@ -5,6 +5,10 @@ require 'nowtv'
 CONFIGURE_PATH = ENV["HOME"] + '/.nowtv'
 USAGE = "USAGE: nowtv [prefecture]"
 
+def format_time(time)
+  time.strftime("%H:%M")
+end
+
 prefecture =
   File.exists?(CONFIGURE_PATH) ? open(CONFIGURE_PATH).read.lines[0].strip : 'tokyo'
 
@@ -20,5 +24,5 @@ client = Nowtv::Client.new
 programs = client.get_program_list(region_code)
 
 programs.each do |program|
-  puts "#{program[:channel_id]} #{program[:station]}: #{program[:title]} [#{program[:start_time]} -> #{program[:end_time]}]"
+  puts "[#{program[:channel_id]}] #{program[:station]}: #{program[:title]} [#{format_time(program[:start_time])} -> #{format_time(program[:end_time])}]"
 end if programs
