@@ -13,18 +13,21 @@ PROGRAM_LIST =
   [
    {
     station: "NHK総合",
+    channel_id: 1,
     title: "ロング・グッドバイ",
     start_time: Time.parse("2014/04/19 21:00"),
     end_time: Time.parse("2014/04/19 22:00")
    },
    {
     station: "NHK Eテレ",
+    channel_id: 2,
     title: "ららら クラシック",
     start_time: Time.parse("2014/04/19 21:30"),
     end_time: Time.parse("2014/04/19 22:00")
    },
    {
     station: "日本テレビ",
+    channel_id: 4,
     title: "コルクを抜く瞬間",
     start_time: Time.parse("2014/04/19 21:54"),
     end_time: Time.parse("2014/04/20 02:00")
@@ -32,29 +35,34 @@ PROGRAM_LIST =
    {
     station: "TBSテレビ",
     title: "スッピンZ",
+    channel_id: 6,
     start_time: Time.parse("2014/04/19 21:54"),
     end_time: Time.parse("2014/04/19 22:00")
    },
    {
     station: "フジテレビ",
+    channel_id: 8,
     title: "さんま&くりぃむの第17回芸能界(秘)個人情報グランプリ",
     start_time: Time.parse("2014/04/19 21:00"),
     end_time: Time.parse("2014/04/19 23:10")
    },
    {
     station: "テレビ朝日",
+    channel_id: 5,
     title: "逆転報道の女(3)",
     start_time: Time.parse("2014/04/19 21:00"),
     end_time: Time.parse("2014/04/19 23:06")
    },
    {
     station: "テレビ東京",
+    channel_id: 7,
     title: "ぴかぴかマンボ",
     start_time: Time.parse("2014/04/19 21:54"),
     end_time: Time.parse("2014/04/19 22:00")
    },
    {
     station: "TOKYO MX",
+    channel_id: 9,
     title: "TOKYO MX NEWS",
     start_time: Time.parse("2014/04/19 21:58"),
     end_time: Time.parse("2014/04/19 22:00")

@@ -28,6 +28,7 @@ module Nowtv
 
         {
           station: half_width(program["stationDispName"]),
+          channel_id: channel_id(program["additionalDisplayChannel"]),
           title: half_width(info["programTitle"]),
           start_time: parse_datetime(info["startDateTime"]),
           end_time: parse_datetime(info["endDateTime"])
@@ -37,6 +38,10 @@ module Nowtv
 
     def half_width(str)
       NKF.nkf("-wZ0", str).gsub("　", " ")
+    end
+
+    def channel_id(display_channel)
+      half_width(display_channel).scan(/\d/).first.to_i
     end
 
     def parse_datetime(datetime)
