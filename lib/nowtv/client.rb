@@ -41,7 +41,7 @@ module Nowtv
     end
 
     def channel_id(display_channel)
-      half_width(display_channel).scan(/\d/).first.to_i
+      half_width(display_channel).scan(/\d+/).first.to_i
     end
 
     def parse_datetime(datetime)
