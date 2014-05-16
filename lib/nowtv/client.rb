@@ -33,7 +33,7 @@ module Nowtv
           start_time: parse_datetime(info["startDateTime"]),
           end_time: parse_datetime(info["endDateTime"])
         }
-      end
+      end.sort_by { |program| program[:channel_id] }
     end
 
     def half_width(str)
