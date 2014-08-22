@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+require 'chronic'
 require 'json'
+require 'nkf'
 require 'open-uri'
 require 'time'
-require 'nkf'
 
 module Nowtv
   class Client
@@ -30,8 +31,8 @@ module Nowtv
           station: half_width(program["stationDispName"]),
           channel_id: channel_id(program["additionalDisplayChannel"]),
           title: half_width(info["programTitle"]),
-          start_time: parse_datetime(info["startDateTime"]),
-          end_time: parse_datetime(info["endDateTime"])
+          start_time: Chronic.parse(info["startDateTime"]),
+          end_time: Chronic.parse(info["endDateTime"])
         }
       end.sort_by { |program| program[:channel_id] }
     end
@@ -42,25 +43,6 @@ module Nowtv
 
     def channel_id(display_channel)
       half_width(display_channel).scan(/\d+/).first.to_i
-    end
-
-    def parse_datetime(datetime)
-      date, time = datetime.split(" ")
-      hour, minute = time.split(":").map(&:to_i)
-
-      hour >= 24 ? parse_midnight_time(date, hour, minute) : Time.parse(datetime)
-    end
-
-    def parse_midnight_time(date_str, hour, minute)
-      day_add = hour / 24
-      hour %= 24
-
-      datetime = Time.parse(date_str)
-      datetime += day_add * 60 * 60 * 24
-      datetime += hour * 60 * 60
-      datetime += minute * 60
-
-      datetime
     end
   end
 
