@@ -1,3 +1,5 @@
+# (2015-01-24) NOTICE: Due to deprecation of API, nowtv is no longer available.
+
 # nowtv
 
 [![Build Status](https://travis-ci.org/dtan4/nowtv.png?branch=master)](https://travis-ci.org/dtan4/nowtv)
