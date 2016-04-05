@@ -2,4 +2,4 @@ sudo: required
 services:
   - docker
 script:
-  - docker info
+  - docker version
